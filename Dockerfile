@@ -34,14 +34,14 @@ RUN apt-get -qqy install ttf-wqy-microhei \
 
 # 设置时区
 ENV TZ "PRC"
-RUN echo "Asia/Shanghai" | tee /etc/timezone \
+RUN echo "Asia/Beijing" | tee /etc/timezone \
   && dpkg-reconfigure --frontend noninteractive tzdata
 
 # 添加具有免密码sudo权限的普通用用户
 RUN useradd yiyern --shell /bin/bash --create-home \
-  && usermod -a -G sudo yiyern \
-  && echo 'yiyern ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
-  && echo 'yiyern:pa55w0rd' | chpasswd
+  && usermod -a -G sudo worker \
+  && echo 'worker ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
+  && echo 'worker:pa55w0rd' | chpasswd
 
 # 安装其他基础软件
 RUN apt-get -qqy --no-install-recommends install curl wget
