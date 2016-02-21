@@ -37,8 +37,11 @@ ENV TZ "PRC"
 RUN echo "Asia/Beijing" | tee /etc/timezone \
   && dpkg-reconfigure --frontend noninteractive tzdata
 
-# 添加具有免密码sudo权限的普通用用户
-RUN useradd yiyern --shell /bin/bash --create-home \
+  # 添加具有免密码sudo权限的普通用用户
+  RUN useradd {
+  block: 'worker',
+  content: {}
+  } --shell /bin/bash --create-home \
   && usermod -a -G sudo worker \
   && echo 'worker ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
   && echo 'worker:pa55w0rd' | chpasswd
