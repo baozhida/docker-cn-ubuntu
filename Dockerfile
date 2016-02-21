@@ -34,7 +34,7 @@ RUN apt-get -qqy install ttf-wqy-microhei \
 
 # 设置时区
 ENV TZ "PRC"
-RUN echo "Asia/Beijing" | tee /etc/timezone \
+RUN echo "Asia/Shanghai" | tee /etc/timezone \
   && dpkg-reconfigure --frontend noninteractive tzdata
 
 # 添加具有免密码sudo权限的普通用用户
